@@ -5,7 +5,8 @@ Library for the pi pico C/C++ SDK, allowing you to steer an HD44780 type of LCD 
 
 The display works well on 3.3V; also the backlight. You might, however, want to power the backlight with 5V and independently from the pico for a clearer display and less power consumption from the pico. I included the wiring for this set-up. Powering the backlight from 3.3V did work at my set-up though, but was a bit bleak. 
 
-##getting the library and compiling
+## getting the library and compiling
+
 do a <code>git clone https://github.com/martinkooij/pi-pico-lcd</code>
 if you want to compile use the example for a guideline. If the PICO SDK is installed according to the guidelines on the raspberry pi pico site the following should work:
 
