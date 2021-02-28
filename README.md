@@ -48,7 +48,7 @@ You can see example usage in <code>example/pico_lcd_example.cpp</code>
 
 ![](img/example2.jpg)
 
-## Fritzig wiring scheme. 
+## Fritzing wiring scheme. 
 
 ![](img/LCDdisplay_bb.png)
 
