@@ -7,7 +7,7 @@ The display works well on 3.3V; also the backlight. You might, however, want to 
 
 ## getting the library and compiling
 
-do a <code>git clone https://github.com/martinkooij/pi-pico-lcd</code>
+do a <code>git clone https://github.com/martinkooij/pi-pico-LCD</code>
 if you want to compile, you can use the provided example as a guideline. If the PICO SDK is installed according to the guidelines on the raspberry pi pico site the following should work:
 
 ````
