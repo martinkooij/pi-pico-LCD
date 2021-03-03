@@ -1,6 +1,5 @@
-#include <cstdlib>
 #include "pico/stdlib.h"
-#include "hardware/gpio.h"
+#include "hardware/pwm.h"
 #include "pico/time.h"
 #include "lcd_display.hpp"
 
@@ -32,6 +31,16 @@
 			one_byte = one_byte >> 1 ;
 		}
 	};
+
+	void LCDdisplay::init_pwm_pin(uint pin) {
+		this->bl_pwm_pin = pin ;
+		gpio_set_function(pin, GPIO_FUNC_PWM);
+		uint slice_num = pwm_gpio_to_slice_num(pin);
+    	pwm_config config = pwm_get_default_config();
+		pwm_config_set_clkdiv(&config, 500.f);
+		pwm_config_set_wrap(&config, 100); 
+		pwm_init(slice_num, &config, true);	
+	}
 	
 	void LCDdisplay::send_raw_data_one_cycle(uint raw_bits[]) { // Array of Bit 7, Bit 6, Bit 5, Bit 4, RS
 		uint32_t bit_value = pin_values_to_mask(raw_bits,5) ;
@@ -61,6 +70,19 @@
 		this->LCDpins[3] = bit4_pin;
 		this->LCDpins[4] = rs_pin;
 		this->LCDpins[5] = e_pin;
+		this->bl_pwm_pin = 255 ;
+		this->no_chars = width;
+		this->no_lines = depth;
+	};
+
+		LCDdisplay::LCDdisplay(int bit4_pin, int bit5_pin, int bit6_pin, int bit7_pin, int rs_pin, int e_pin, int bl_pin, int width, int depth) { // constructor
+		this->LCDpins[0] = bit7_pin;
+		this->LCDpins[1] = bit6_pin;
+		this->LCDpins[2] = bit5_pin;
+		this->LCDpins[3] = bit4_pin;
+		this->LCDpins[4] = rs_pin;
+		this->LCDpins[5] = e_pin;
+		this->bl_pwm_pin = bl_pin;
 		this->no_chars = width;
 		this->no_lines = depth;
 	};
@@ -82,6 +104,12 @@
 		send_full_byte(COMMAND, blink_cursor);
 	};	
 	
+	void LCDdisplay::set_backlight(int brightness){
+		if ( this->bl_pwm_pin < 30) {
+		   pwm_set_gpio_level(this->bl_pwm_pin, brightness);
+		}
+	}
+
 	void LCDdisplay::init() { // initialize the LCD
 	
 		uint all_ones[6] = {1,1,1,1,1,1};
@@ -112,6 +140,9 @@
 		send_full_byte(COMMAND, cursor_set);
 		send_full_byte(COMMAND, display_prop_set);
 		clear() ;
+
+		if (this->bl_pwm_pin < 30 ){
+			init_pwm_pin(this->bl_pwm_pin);		}
 	};
 
 	void LCDdisplay::goto_pos(int pos_i, int line) {
