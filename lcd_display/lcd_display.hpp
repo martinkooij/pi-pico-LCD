@@ -1,5 +1,7 @@
 #pragma once
 
+#define BLINK true
+#define NO_BLINK false
 
 class LCDdisplay {
 	
@@ -10,6 +12,7 @@ class LCDdisplay {
 	uint32_t LCDmask = 0 ; //without clock
 	int no_chars;
 	int no_lines;
+	int cursor_status[2] = {0,0};
 	
 	uint32_t pin_values_to_mask(uint raw_bits[],int length);
 
@@ -33,7 +36,9 @@ class LCDdisplay {
 
 	void cursor_off();
 
-	void cursor_on();	
+	void cursor_on();
+
+	void cursor_on(bool blink);
 	
 	void init() ;
 
@@ -42,6 +47,10 @@ class LCDdisplay {
 	void print(const char * str);
 		
 	void print_wrapped(const char * str);
+	
+	void display_off() ;
+	
+	void display_on() ;
 				
 };
 

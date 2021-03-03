@@ -97,12 +97,35 @@
 	void LCDdisplay::cursor_off() {
 		uint no_cursor[8] = {0,0,0,0,1,1,0,0};
 		send_full_byte(COMMAND, no_cursor);
+		this->cursor_status = {0,0};
 	};
 
 	void LCDdisplay::cursor_on() {
-		uint blink_cursor[8] = {0,0,0,0,1,1,1,1};
-		send_full_byte(COMMAND, blink_cursor);
+		uint command_cursor[8] = {0,0,0,0,1,1,1,1};
+		send_full_byte(COMMAND, command_cursor);
+		this->cursor_status = {1,1};
 	};	
+	
+	void LCDdisplay::cursor_on (bool blink) {
+		uint command_cursor[8] = {0,0,0,0,1,1,1,0};		
+		if (blink) cursor[7]=1 ;
+		send_full_byte(COMMAND, command_cursor);
+		this->cursor_status = {1,cursor[7]};
+	};		
+		
+	void LCDdisplay::display_off() {
+		uint command_display[8] = {0,0,0,0,1,0,0,0};
+		command_display[7] = this->cursor_status[1];
+		command_display[6] = this->cursor_status[0];		
+		send_full_byte(COMMAND, no_cursor);
+	};
+
+	void LCDdisplay::display_on() {
+		uint command_display[8] = {0,0,0,0,1,1,0,0};
+		command_display[7] = this->cursor_status[1];
+		command_display[6] = this->cursor_status[0];		
+		send_full_byte(COMMAND, no_cursor);
+	};
 	
 	void LCDdisplay::set_backlight(int brightness){
 		if ( this->bl_pwm_pin < 30) {
@@ -142,7 +165,9 @@
 		clear() ;
 
 		if (this->bl_pwm_pin < 30 ){
-			init_pwm_pin(this->bl_pwm_pin);		}
+			init_pwm_pin(this->bl_pwm_pin);		};
+			
+		this->cursor_status = {0,0};
 	};
 
 	void LCDdisplay::goto_pos(int pos_i, int line) {
