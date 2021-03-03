@@ -2,8 +2,6 @@
 
 #include "lcd_display.hpp"
 
-#define DPIN 16
-
 LCDdisplay myLCD(2,3,4,5,14,15,16,2); // DB4, DB5, DB6, DB7, RS, E, character_width, no_of_lines
 
 int main() {
