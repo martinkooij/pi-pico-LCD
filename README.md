@@ -44,11 +44,11 @@ The following methods on the created object are provided:
 
 You can control the backlight brightness level (via PWM method) by defining an GPIO pin. The GPIO pin itself it *not* strong enough to drive the LCD backlight directly, so a transistor is advised. I coupled the transistor to the 5V rail (see Fritzing diagram below) and added a 220 OHM resistor, but your mileage may vary. 
 
-In this case you can add the backlight pin to the constructor and set the brightness in your code (after an myDisplay.init(), of course)
+In this case you can add the backlight pin to the constructor.
 ````
 LCDdisplay myDisplay(pinDB4, pinDB5, pinDB6, pinDB7, pinRS, pinE, pinBL, char_width, no_lines);
 ````
-In your code you can now set your brightness level to x. x is a percentage ranging from 0..100.
+Again you must first do an <code>init()</code> again before anything else. After this you can set your brightness level to x. x is a percentage ranging from 0..100.
 - <code>set_backlight(int brightness)</code> brightness can be set between 0 (off) and 100 (fully on). 
  
 ## Examples
