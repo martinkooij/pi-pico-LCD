@@ -77,5 +77,6 @@ Building the advanced usage example: go to the directory example_backlight. Foll
 ![](img/blconnect.png)
 
 ## Release notes
+xx-mar-2021: added some useful methods to the library
 3 -mar-2021: Added backlight option<br>
 27-feb-2021: First release
