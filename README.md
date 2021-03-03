@@ -39,17 +39,6 @@ The following methods on the created object are provided:
 - <code>print_wrapped(const char *)</code>. Clear the screen, moves the cursor to 0,0 and tries to print the whole string on the LCD screen by wrapping.
 - <code>cursor_on()</code> Shows a blinking cursor.
 - <code>cursor_off()</code> No cursor shown on LCD (default).
-
-## Advanced usage
-
-You can control the backlight brightness level (via PWM method) by defining an GPIO pin. The GPIO pin itself it *not* strong enough to drive the LCD backlight directly, so a transistor is advised. I coupled the transistor to the 5V rail (see Fritzing diagram below) and added a 220 OHM resistor, but your mileage may vary. 
-
-In this case you can add the backlight pin to the constructor and set the brightness in your code (after an myDisplay.init(), of course)
-````
-LCDdisplay myDisplay(pinDB4, pinDB5, pinDB6, pinDB7, pinRS, pinE, pinBL, char_width, no_lines);
-````
-In your code you can now set your brightness level to x. x is a percentage ranging from 0..100.
-- <code>set_backlight(int brightness)</code> brightness can be set between 0 (off) and 100 (fully on). 
  
 ## Examples
 
@@ -63,7 +52,18 @@ You can see example usage in <code>example/pico_lcd_example.cpp</code>
 
 ![](img/LCDdisplay_bb.png)
 
-##Wiring scheme with backlight option
+## Advanced usage
+
+As added fun, you can control the backlight brightness level (via PWM method) by defining an GPIO pin. The GPIO pin itself it *not* strong enough to drive the LCD backlight directly, so a transistor is advised. I coupled the transistor to the 5V rail (see Fritzing diagram below) and added a 220 OHM resistor, but your mileage may vary. 
+
+In this case you can add the backlight pin to the constructor.
+````
+LCDdisplay myDisplay(pinDB4, pinDB5, pinDB6, pinDB7, pinRS, pinE, pinBL, char_width, no_lines);
+````
+Again you must first do an <code>init()</code> again before anything else. After this you can set your brightness level to x. x is a percentage ranging from 0..100.
+- <code>set_backlight(int brightness)</code> brightness can be set between 0 (off) and 100 (fully on). 
+
+## Wiring scheme with backlight option
 
 ![](img/LCDdisplay_bl.png)
 
