@@ -63,5 +63,13 @@ You can see example usage in <code>example/pico_lcd_example.cpp</code>
 
 ![](img/LCDdisplay_bb.png)
 
+##Wiring scheme with backlight option
+
+![](img/LCDdisplay_bl.png)
+
+
+![](img/blconnect.png)
+
 ## Release notes
+3 -mar-2021: Added backlight option
 27-feb-2021: First release
