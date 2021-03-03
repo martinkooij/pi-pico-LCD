@@ -71,5 +71,5 @@ Again you must first do an <code>init()</code> again before anything else. After
 ![](img/blconnect.png)
 
 ## Release notes
-3 -mar-2021: Added backlight option
+3 -mar-2021: Added backlight option<br>
 27-feb-2021: First release
