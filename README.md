@@ -32,7 +32,7 @@ LCDdisplay myDisplay(pinDB4, pinDB5, pinDB6, pinDB7, pinRS, pinE, char_width, no
 The first 6 arguments gives the GPIO connection pins that should be connected to the four DataBits, RS and E respectively. 
 
 The following methods on the created object are provided:
-- <code>init()</code> inititialize the connection with the LCD. Must be executed before any other operation. 
+- <code>init()</code> inititializes the connection with the LCD. Must be executed before any other operation. 
 - <code>clear()</code> clears the display and put the cursor to 0,0.
 - <code>goto(int c, int l)</code> go to character "c" on line "l". 0,0 is top left; 0,1 is second line, leftmost character. 
 - <code>print(const char *)</code> prints the string, from the cursor. If string is some characters too long to fit it will be truncated. When it is far too long to fit it will cause random behavior.
@@ -40,8 +40,8 @@ The following methods on the created object are provided:
 - <code>cursor_on()</code> Sets cursor on. Blinking is implied. (see next if you want the same call but more control)
 - <code>cursor_on(bool blink)</code> Sets the curson on. Blinks when blink is true, no blinking when false.
 - <code>cursor_off()</code> No cursor shown on LCD (default).
-- <code>display_on()</code> Switches display off.
-- <code>display_off()</code> Switches display on. 
+- <code>display_on()</code> Switches display on (default).
+- <code>display_off()</code> Switches display off. 
 
  
 ## Examples
